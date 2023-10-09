@@ -13,7 +13,7 @@ const getProgram = async (request,response) => {
 }
 
 const addProgram = async (request,response) => {
-    await addProgramDB (request.body)
+    await addProgramDB(request.body)
         .then(data => response.status(200).json({
             status:'success',
             message: 'Program inserido com sucesso',

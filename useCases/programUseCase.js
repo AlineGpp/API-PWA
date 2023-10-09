@@ -13,23 +13,32 @@ const getProgramsDB = async () => {
 
 
 const addProgramDB = async (body) => {
-    try{
-        const {id,description,alert,fulldescription,address,image} = body;
-       
-        const resultados = await pool.query(`INSERT INTO program (id,description,alert,fulldescription,address,image)
-         VALUES ($1,$2,$3,$4,$5,$6) RETURNING id,description,alert,fulldescription,address,image`,
-         [id,description,alert,fulldescription,address,image]);
-        const program = resultados.rows[0];
-        return  new Program(program.id, program.description, program.alert, program.fulldescription, program.address, program.image);
+    try {
+        const {description, alert, fulldescription, address, image} = body;
+        console.log(JSON.stringify(body));
 
-    }catch(err){
+        const maxIdResult = await pool.query('SELECT MAX(id) as max_id FROM program');
+        const maxId = maxIdResult.rows[0].max_id || 0;
+        const newId = maxId + 1;
+
+        const resultados = await pool.query(`
+            INSERT INTO program (id, description, alert, fulldescription, address, image)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING id, description, alert, fulldescription, address, image`,
+            [newId, description, alert, fulldescription, address, image]);
+
+        const program = resultados.rows[0];
+        return new Program(program.id, program.description, program.alert, program.fulldescription, program.address, program.image);
+
+    } catch(err) {
         throw "Erro ao inserir program " + err;
     }
 }
 
 
+
 const updateProgramDB = async (body) => {
-    console.log(body);
+    console.log(JSON.stringify(body));
     try{
         const {id,description,alert,fulldescription,address,image} = body;
         const resultados = await pool.query(`UPDATE 

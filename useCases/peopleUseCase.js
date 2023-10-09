@@ -13,24 +13,33 @@ const getPeoplesDB = async () => {
 }
 
 const addPeopleDB = async (body) => {
-    try {   
-        const {id,name, sex, adress, complement, district, zip_code , 
-            telephone, celular,  e_mail, profession, login, password, city,address} = body; 
-        const results = await pool.query(`INSERT INTO people (id,name, sex, adress, complement, district, 
-            zip_code , telephone, celular,  e_mail, profession, login, password, city,address) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,$14,$15)
-            returning id, name, sex, adress, complement, district, zip_code , 
-            telephone, celular,  e_mail, profession, login, password, city,address`,
-        [id,name, sex, adress, complement, district, zip_code , 
-            telephone, celular,  e_mail, profession, login, password, city,address]);
+    try {
+        const {name, sex, adress, complement, district, zip_code, telephone, celular, e_mail, 
+            profession, login, password, city, address} = body;
+
+        const maxIdResult = await pool.query('SELECT MAX(id) as max_id FROM people');
+        const maxId = maxIdResult.rows[0].max_id || 0;
+        const newId = maxId + 1;
+
+        const results = await pool.query(`
+            INSERT INTO people (id, name, sex, adress, complement, district, 
+                zip_code, telephone, celular, e_mail, profession, login, password, city, address) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+            RETURNING id, name, sex, adress, complement, district, 
+                zip_code, telephone, celular, e_mail, profession, login, password, city, address`,
+            [newId, name, sex, adress, complement, district, zip_code, telephone, celular, 
+             e_mail, profession, login, password, city, address]);
+
         const people = results.rows[0];
         return new People(people.id, people.name, people.sex, people.adress, people.complement, 
-            people.district, people.zip_code , people.telephone, people.celular,  people.e_mail, people.profession, 
-            people.login, people.password, people.city,people.address); 
+                          people.district, people.zip_code, people.telephone, people.celular, 
+                          people.e_mail, people.profession, people.login, people.password, 
+                          people.city, people.address);
     } catch (err) {
         throw "Erro ao inserir a pessoa: " + err;
-    }    
+    }
 }
+
 
 
 const updatePeopleDB = async (body) => {
