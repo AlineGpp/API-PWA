@@ -25,9 +25,10 @@ create table people (
 )
 
 
-create table people_program(
-	people integer not null, 
-	program integer not null, 
-	foreign key (people) references people (id),
-	foreign key (program) references program (id)
-)
+CREATE TABLE people_program (
+    people INTEGER NOT NULL, 
+    program INTEGER NOT NULL, 
+    FOREIGN KEY (people) REFERENCES people (id),
+    FOREIGN KEY (program) REFERENCES program (id),
+    PRIMARY KEY (people, program)
+);
