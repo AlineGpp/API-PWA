@@ -1,4 +1,4 @@
-const { getPeoplesDB, addPeopleDB, updatePeopleDB, deletePeopleDB, getPeoplePorCodigoDB } = require('../usecases/peopleUseCase')
+const { getPeoplesDB, addPeopleDB, updatePeopleDB, deletePeopleDB, getPeoplePorCodigoDB } = require('../useCases/peopleUseCase');
 
 const getPeoples = async (request, response) => {
     await getPeoplesDB()
