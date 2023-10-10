@@ -15,4 +15,4 @@ routesProgram.route('/program')
 
 
 
-module.exports = {routesProgram};
+module.exports = routesProgram;

@@ -7,4 +7,4 @@ routesPeopleProgram.route('/people_program')
     .get(getPeopleProgram)
     .post(addPeopleProgram)
 
-module.exports = { routesPeopleProgram };
+module.exports =  routesPeopleProgram ;
