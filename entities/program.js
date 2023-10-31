@@ -1,11 +1,8 @@
 class Program {
-    constructor (id, description, alert, fulldescription, address, image){
+    constructor (id, description,address){
         this.id = id;
         this.description = description;
-        this.alert = alert;
-        this.fulldescription = fulldescription;
         this.address = address;
-        this.image = image;
     }
 }
 
