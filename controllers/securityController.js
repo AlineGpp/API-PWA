@@ -1,4 +1,4 @@
-const { autenticaUsuarioDB } = require('../usecases/segurancaUseCases');
+const { autenticaUsuarioDB } = require('../useCases/segurancaUseCases');
 require("dotenv-safe").config();
 const jwt = require('jsonwebtoken');
 
