@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { verificaJWT } = require("../controllers/securityController");
 
 const {
   getPeoples,
@@ -12,10 +13,10 @@ const routesPeoples = new Router();
 
 routesPeoples
   .route("/people")
-  .get(getPeoples)
-  .post(addPeople)
-  .put(updatePeople);
+  .get(verificaJWT,getPeoples)
+  .post(verificaJWT,addPeople)
+  .put(verificaJWT,updatePeople);
 
-routesPeoples.route("/people/:id").get(getPeoplePorID).delete(deletePeople);
+routesPeoples.route("/people/:id").get(verificaJWT,getPeoplePorID).delete(verificaJWT,deletePeople);
 
 module.exports =  routesPeoples ;

@@ -4,7 +4,7 @@ class People {
         this.name = name;
         this.e_mail = e_mail;
         this.login = login;
-        this.password = password;
+        //this.password = password;
     }
 }
 
