@@ -1,11 +1,12 @@
 class PeopleProgram {
     
-    constructor (id,program_name,people_name,people_id,program_id){
-        this.id= id;
+    constructor (people,program,program_name,people_name){
+        //this.id= id;
+        this.people = people;
+        this.program = program; 
         this.program_name = program_name; 
         this.people_name = people_name;
-        this.program_id = program_id; 
-        this.people_id = people_id;
+       
     }
 
 }

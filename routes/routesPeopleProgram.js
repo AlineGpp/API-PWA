@@ -6,9 +6,8 @@ const routesPeopleProgram = new Router();
 routesPeopleProgram.route('/people_program')
     .get(verificaJWT,getPeopleProgram)
     .post(verificaJWT,addPeopleProgram)
-    .put(verificaJWT,updatePeopleProgram);
 
-routesPeopleProgram.route('/people_program/:id')
+routesPeopleProgram.route('/people_program/:idPeo/:idPro')
     .delete(verificaJWT,deletePeopleProgram)
     .get(verificaJWT,getPeopleProgramCodigo);
 
